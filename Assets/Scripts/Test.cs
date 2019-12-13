@@ -39,16 +39,18 @@ public class Test : Thing{
     private void GetPos()
     {
         pos = (target.position - transform.position).normalized;
+        
     }
 
     public void SetPos(Transform a)
     {
         target  = a;
+        speed *= 5;
     }
 
     public override void Fly() //飞向需要的点
     {
-        this.transform.Translate(pos * speed * Time.deltaTime);
+        this.transform.Translate( pos * speed * Time .deltaTime);
     }
 
     public override void Accept()
