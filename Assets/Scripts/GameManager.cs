@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
     public Transform pos;
 
 	// Use this for initialization
-	void Start () {        
+	void Start () {   
 		if(things.Length > 0)
         {
             Vector2 p = (pos.position - things[0].transform.position).normalized;
