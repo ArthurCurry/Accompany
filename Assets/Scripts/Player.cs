@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
 
     public Transform center;
 
-    //
+    // 绕圆周运动
     public float _radius_length;
     public float _angle_speed;
 
@@ -19,8 +19,6 @@ public class Player : MonoBehaviour {
     private Vector3 _pos_new;
 
     public Vector3 _center_pos;
-
-    public bool _round_its_center;
     // Use this for initialization
     void Start () {
         speed = 10;
@@ -86,8 +84,7 @@ public class Player : MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                Vector2 a = (pos.position - collider.transform.position).normalized;
-                collider.GetComponent<Test>().Fly(a);
+                collider.GetComponent<Test>().SetPos(pos);
             }
         }
     }
