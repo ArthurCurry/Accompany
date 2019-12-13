@@ -13,7 +13,7 @@ public class Gap : MonoBehaviour {
     private float diffMinus;
     [SerializeField]
     private float growSpeed;
-    public float wide;
+    public float width;//宽
     public float height;
     
 	// Use this for initialization
@@ -46,5 +46,6 @@ public class Gap : MonoBehaviour {
         {
             transform.localScale = new Vector3(targetScale_x, transform.localScale.y, transform.localScale.z);
         }
+        width = transform.localScale.x * collider.size.x;
     }
 }
