@@ -29,7 +29,7 @@ public class Gap : MonoBehaviour {
         
         if(Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log(transform.localScale.x);
+            //Debug.Log(transform.localScale.x);
             targetScale_x = scaleSize_x + diffPlus;
         }
         GapGrow();
