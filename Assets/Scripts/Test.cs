@@ -11,33 +11,44 @@ public class Test : Thing{
 	
 	// Update is called once per frame
 	void Update () {
-        //if (fly)
-        //{
-        //    Fly(pos);
-        //}
+        GetPos();
+        if (fly)
+        {
+            Fly();
+        }
 	}
 
-    public override void Init(float aDamage, float bDamage, float speed ,bool received , Vector2 a)//东西飞出初始化
+    public override void Init(float aDamage, float bDamage, float speed ,bool received , Transform a)//东西飞出初始化
     {
         this.a_damage = aDamage;
         this.b_damage = bDamage;
         this.speed = speed;
         isA = received;
-        pos = a;
+        target = a;
+        GetPos();
         this.rg = GetComponent<Rigidbody2D>();
-        Invoke("T", 2);
+        fly = true;
     }
     
-    private void T()
+    private void T()  //测试用
     {
         this.rg.velocity = pos * speed ;
         //this.fly = true;
     }
 
-    public override void Fly(Vector2 a) //飞向需要的点
+    private void GetPos()
     {
-        //this.transform.Translate(a * speed * Time.deltaTime);
-        this.rg.velocity = a * speed * 10;
+        pos = (target.position - transform.position).normalized;
+    }
+
+    public void SetPos(Transform a)
+    {
+        target  = a;
+    }
+
+    public override void Fly() //飞向需要的点
+    {
+        this.transform.Translate(pos * speed * Time.deltaTime);
     }
 
     public override void Accept()
