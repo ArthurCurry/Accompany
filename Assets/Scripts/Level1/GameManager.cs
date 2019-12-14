@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance;
     public AudioPlay ap;
     public AudioClip hit;
+    public AudioClip level1;
 	// Use this for initialization
 	void Awake () {
         Init();
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour {
         count = true;
         image2 = GameObject.Find(IDRegister.CANVAS).transform.Find("Image2").gameObject;
         hit = ap.AddAudioClip("Audio/off");
+        level1 = ap.AddAudioClip("Audio/tw086");
         if(tp==null)
         {
             tp = new List<ThingProperty>();

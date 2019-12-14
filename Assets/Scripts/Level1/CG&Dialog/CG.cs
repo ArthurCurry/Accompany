@@ -147,7 +147,8 @@ public class CG : MonoBehaviour
             case "CG9": GameObject.Find(IDRegister.CANVAS).transform.Find("CG10").gameObject.SetActive(true); break;
             case "CG10": GameObject.Find(IDRegister.CANVAS).transform.Find("CG11").gameObject.SetActive(true); break;
             case "CG11": GameManager.instance.startFly = true; GameManager.instance.time = 4.5f;GameManager.instance.ap.Stop(Camera.main.gameObject);
-                GameObject.Find(IDRegister.CANVAS).transform.Find("Image").GetComponent <CG>().mStatuss=FadeStatuss.FadeOut; break;
+                GameManager.instance.ap.AddAudioClip(Camera.main.gameObject, "Audio/tw086"); GameManager.instance.ap.Play(Camera.main.gameObject);
+                 GameObject.Find(IDRegister.CANVAS).transform.Find("Image").GetComponent <CG>().mStatuss=FadeStatuss.FadeOut; break;
             default: break;
 
         }
