@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Test : Thing{
 
-	// Use this for initialization
+    // Use this for initialization
+    private string posName;
 	void Start () {
         targetTime = 0.4f;
         time = targetTime;
@@ -20,13 +21,20 @@ public class Test : Thing{
         }
 	}
 
-    public override void Init(float aDamage, float bDamage, float speed ,bool received , Transform a)//东西飞出初始化
+    public override void Init(bool received , Transform a)//东西飞出初始化
     {
-        this.a_damage = aDamage;
-        this.b_damage = bDamage;
-        this.speed = speed;
+        for(int i=0;i<GameManager .instance.tp.Count; i++)
+        {
+            if(gameObject .name .Equals (GameManager .instance.tp[i].name))
+            {
+                this.a_damage = GameManager.instance.tp[i].a_damage;
+                this.b_damage = GameManager.instance.tp[i].b_damage;
+                this.speed = GameManager.instance.tp[i].speed + (GameManager.instance.status - 1) * 0.1f;
+            }
+        }
         isLeft = received;
         target = a;
+        posName = a.gameObject.name;
         GetPos();
         this.rg = GetComponent<Rigidbody2D>();
         fly = true;
@@ -34,7 +42,10 @@ public class Test : Thing{
     
     private void GetPos() //检测目标距离
     {
-        pos = (target.position - transform.position).normalized;
+        if (target != null) 
+        {
+            pos = (target.transform.position - transform.position).normalized; 
+        }
         
     }
 
@@ -43,6 +54,7 @@ public class Test : Thing{
         if (time >= targetTime)
         {
             target = a;
+            posName = a.gameObject.name;
             speed *= 5;
             isLeft = !isLeft;
             time = 0;

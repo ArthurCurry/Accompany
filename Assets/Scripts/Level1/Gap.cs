@@ -78,7 +78,7 @@ public class Gap : MonoBehaviour {
         {
             if(score_temp <=thresholds[x - 1])
             {
-                UpdateTargetSize(false);
+                UpdateTargetSize(true);
                 x--;
             }
         }
@@ -86,13 +86,12 @@ public class Gap : MonoBehaviour {
         {
             if (score_temp <= thresholds[x - 1])
             {
-                UpdateTargetSize(false);
+                UpdateTargetSize(true);
                 x--;
-                Debug.Log(1);
             }
             if (score_temp >= thresholds[x + 1])
             {
-                UpdateTargetSize(true);
+                UpdateTargetSize(false);
                 x++;
             }
         }

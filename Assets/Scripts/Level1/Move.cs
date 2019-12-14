@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Move : MonoBehaviour {
 
@@ -25,8 +26,10 @@ public class Move : MonoBehaviour {
     void UpdatePosition()
     {
         Vector3 borderRight = Camera.main.ScreenToWorldPoint( new Vector3(Screen.width,Screen.height/2,10));
+        borderRight.x -= 3.2f;
         Vector3 borderLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height / 2, 10));
-        if(right>0)
+        borderLeft.x += 3.2f;
+        if (right>0)
         {
             transform.position = (gapObj.transform.position + Vector3.right * gap.width/2 + borderRight) / 2;
         }
@@ -45,11 +48,13 @@ public class Move : MonoBehaviour {
             {
                 UpdateLocalScore(collider.GetComponent<Thing>().PassDamage(true));
                 gap.score_l = scoreTotal;
+                GameObject.Find(IDRegister.CANVAS).transform.Find("LeftScore").GetComponent<TextMeshProUGUI>().text = scoreTotal.ToString();
             }
             else if(this.gameObject.name.Equals(IDRegister .rightPos))  
             {
                 UpdateLocalScore(collider.GetComponent<Thing>().PassDamage(false));
                 gap.score_r = scoreTotal;
+                GameObject.Find(IDRegister.CANVAS).transform.Find("RightScore").GetComponent<TextMeshProUGUI>().text = scoreTotal.ToString();
             }
         }
     }
