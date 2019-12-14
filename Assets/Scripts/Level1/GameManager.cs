@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
     private bool count;
 
     private float time;
+    private float animationTime;
     private float targetTime;
 
     public List<ThingProperty> tp;
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour {
     {
         status = 1;
         time = 0;
+        animationTime = 0;
         targetTime = 6;
         count = true;
         if(tp==null)
@@ -99,6 +101,7 @@ public class GameManager : MonoBehaviour {
 
     void UpadateTime()
     {
+        animationTime += Time.deltaTime;
         time += Time.deltaTime;
     }
 
