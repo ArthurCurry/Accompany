@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour {
     void Die()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        StartCoroutine(DieCoroutine(4f));
+        StartCoroutine(DieCoroutine(2f));
     }
 
     void OnTriggerEnter2D(Collider2D other)
