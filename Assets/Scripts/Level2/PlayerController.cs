@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -31,12 +32,15 @@ public class PlayerController : MonoBehaviour {
     private float minJumpTime;
     [SerializeField]
     private float maxJumpTime;
+    private SpriteRenderer sprite;
+
 
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody2D>();
         originalGravityScale = rb.gravityScale;
         otherPlayer = GameObject.FindWithTag(otherPlayerTag);
+        sprite = GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
@@ -76,7 +80,7 @@ public class PlayerController : MonoBehaviour {
         {
             float dampTime = timer / jumpTime;
             Vector2 jumpSpeed = Vector2.Lerp(jumpStartSpeed * Vector2.up, Vector2.zero, dampTime);
-            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed.y);
+            rb.velocity = new Vector2(direction.x*moveSpeed/3, jumpSpeed.y);
             timer += Time.deltaTime;
             if (rb.velocity.y == 0)
                 StopAllCoroutines();
@@ -104,6 +108,35 @@ public class PlayerController : MonoBehaviour {
             jumpTime = maxJumpTime;
         if (disBetweenPlayers <= minDis)
             jumpTime = minJumpTime;
+    }
+
+    void Die()
+    {
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        StartCoroutine(DieCoroutine(1.5f));
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag.Equals("Trap"))
+        {
+            Die();
+        }
+    }
+
+    IEnumerator DieCoroutine(float dieTime)
+    {
+        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        Debug.Log(sprite.color.a);
+        while(sprite.color.a>0.01f)
+        {
+            float originalTrans = sprite.color.a;
+            float transparency = Mathf.Lerp(originalTrans, 0f, Time.deltaTime * dieTime);
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, transparency);
+                
+            yield return null;
+        }
+        SceneManager.LoadScene("Level2");
     }
 
 }
