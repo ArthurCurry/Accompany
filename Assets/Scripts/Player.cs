@@ -6,9 +6,13 @@ public class Player : MonoBehaviour {
 
     private float speed; //移动速度
 
+    private bool done;
+
     public Transform pos;
 
     public Transform center;
+    [SerializeField]
+    private Vector3 previousCenter; //判断中心有没有动
 
     // 绕圆周运动
     public float _radius_length;
@@ -20,18 +24,40 @@ public class Player : MonoBehaviour {
 
     public Vector3 _center_pos;
     // Use this for initialization
-    void Start () {
+
+    void Start()
+    {
         speed = 10;
+        done = false;
+        previousCenter = new Vector3(0, 0, 0);
         _center_pos = center.transform.position;
         _angle_speed = 4f;
-        _radius_length = Vector3.Distance(transform .position, center.position);
-
-        temp_angle = -Mathf.Deg2Rad * Vector2.Angle((transform .position -center .position),transform.right );
-
+        _radius_length = Vector3.Distance(transform.position, center.position);
+    }
+    void UpdateAngel()
+    {
+        center = GameManager.instance.pos1;
+        if (!done)
+        {
+            _center_pos = center.transform.position;
+            _radius_length = Vector3.Distance(transform.position, center.position);
+            temp_angle = -Mathf.Deg2Rad * Vector2.Angle((transform.position - center.position), transform.right);
+            done = true;
+        }
+        if (Mathf .Abs(center.transform.position.x - previousCenter.x)>0.1)
+        {
+            Debug.Log(center.position);
+            Debug.Log(previousCenter);
+            _center_pos = center.transform.position;
+            _radius_length = Vector3.Distance(transform.position, center.position);
+            temp_angle = -Mathf.Deg2Rad * Vector2.Angle((transform.position - center.position), transform.right);
+            previousCenter = center.position;
+        }
     }
 	
 	// Update is called once per frame
 	void Update () {
+        UpdateAngel();
         Move1();
 	}
 

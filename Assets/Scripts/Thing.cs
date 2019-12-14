@@ -19,8 +19,7 @@ public abstract class Thing : MonoBehaviour{
 
     public enum type //东西的类型
     { 
-
-    
+        
     }
 
     public abstract void Init(float aDamage, float bDamage, float speed ,bool received , Transform a); //东西飞出初始化

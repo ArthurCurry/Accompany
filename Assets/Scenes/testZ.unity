@@ -312,7 +312,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   things:
   - {fileID: 110534720}
-  pos: {fileID: 475611411}
+  pos1: {fileID: 0}
+  pos2: {fileID: 0}
 --- !u!4 &235475761
 Transform:
   m_ObjectHideFlags: 0
@@ -557,8 +558,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pos: {fileID: 1446490918}
   center: {fileID: 0}
+  previousCenter: {x: 0, y: 0, z: 0}
   _radius_length: 0
-  _angle_speed: 0
+  _angle_speed: 4
   _center_pos: {x: 0, y: 0, z: 0}
 --- !u!212 &1296119699
 SpriteRenderer:

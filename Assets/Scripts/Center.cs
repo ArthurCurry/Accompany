@@ -18,7 +18,7 @@ public class Center : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collider) //吸收东西
     {
-        if(collider .tag == "Thing")
+        if(collider .tag == IDRegister .thingTag)
         {
             if(this .isA && collider .GetComponent <Test >().isA)
             {
