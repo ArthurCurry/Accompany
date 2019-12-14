@@ -22,6 +22,7 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         CameraMove();
+        
 	}
 
     void Follow(Vector2 target,float speed)
@@ -40,4 +41,6 @@ public class CameraController : MonoBehaviour {
             Follow(pos,followSpeed);
         }
     }
+
+
 }
