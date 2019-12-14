@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Center : MonoBehaviour {
 
-    private bool isA; //与Thing里面的共同判断能被该中心点吸收
+    public bool isLeft; //与Thing里面的共同判断能被该中心点吸收
 
 	// Use this for initialization
 	void Start () {
-        isA = true;
+
 	}
 	
 	// Update is called once per frame
@@ -20,9 +20,9 @@ public class Center : MonoBehaviour {
     {
         if(collider .tag == IDRegister .thingTag)
         {
-            if(this .isA && collider .GetComponent <Test >().isA)
+            if(this .isLeft && collider .GetComponent <Test >().isLeft || !this.isLeft && !collider.GetComponent<Test>().isLeft)
             {
-                collider.GetComponent<Test>().Accept();
+                collider.GetComponent<Thing>().Accept();
             }
         }
     }

@@ -15,22 +15,29 @@ public class Gap : MonoBehaviour {
     public float width;//宽
     [HideInInspector]
     public float height;
-    private int[] thresholds = { -80, -40, -20, 0, 20, 40 };    //阈值，每档中间不作响应
+    private int[] thresholds = { -80,-60, -40, -20, 0, 20, 40 };    //阈值，每档中间不作响应
+    private int x; //现在裂缝所在的挡位
+    public float score_l;
+    public float score_r;
 	// Use this for initialization
 	void Start () {
         collider = GetComponent<BoxCollider2D>();
         scaleSize_x = transform.localScale.x;
         targetScale_x = scaleSize_x;
+        x = 4;
+        score_l = 0;
+        score_r = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        
+
         /*if(Input.GetKeyDown(KeyCode.E))
         {
             //Debug.Log(transform.localScale.x);
             targetScale_x = scaleSize_x + diffPlus;
         }*/
+        UpdateScore();
         GapGrow();
 	}
 
@@ -60,8 +67,34 @@ public class Gap : MonoBehaviour {
         }
     }
 
-    public void UpdateDiff(float targetDiff)
+    public void UpdateScore()
     {
-        diff = targetDiff;
+        float score_temp = (score_l + score_r) / 2;
+        if (x == 0)
+        {
+            //游戏结束
+        }
+        else if (x == 6)
+        {
+            if(score_temp <=thresholds[x - 1])
+            {
+                UpdateTargetSize(false);
+                x--;
+            }
+        }
+        else
+        {
+            if (score_temp <= thresholds[x - 1])
+            {
+                UpdateTargetSize(false);
+                x--;
+                Debug.Log(1);
+            }
+            if (score_temp >= thresholds[x + 1])
+            {
+                UpdateTargetSize(true);
+                x++;
+            }
+        }
     }
 }

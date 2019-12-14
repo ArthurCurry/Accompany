@@ -6,8 +6,8 @@ public class GameManager : MonoBehaviour {
 
     public Thing[] things;
 
-    public Transform pos1; //左边的点
-    public Transform pos2; //右边的点
+    public Transform pos1; //右边的点
+    public Transform pos2; //左边的点
 
     public static GameManager instance;
 	// Use this for initialization
@@ -15,9 +15,11 @@ public class GameManager : MonoBehaviour {
         Init();
         GetCenterPos();
         if (things.Length > 0)
-        {            
-            things[0].Init(1, 10000, 1, true, pos1);
-            //things[0].Fly(p);
+        {
+            for (int i = 0; i < things.Length; i++)
+            {
+                things[i].Init(-10, -10, 1.5f, false, pos1);
+            }
         }
 	}
 	

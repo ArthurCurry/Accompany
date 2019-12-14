@@ -39,19 +39,24 @@ public class Move : MonoBehaviour {
    
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.tag.Equals("Thing"))
+        if(collider.gameObject.tag.Equals(IDRegister .thingTag))
         {
-            gap.UpdateTargetSize(true);
-        }
-        else if(collider.gameObject.tag.Equals(""))
-        {
-            gap.UpdateTargetSize(false);
+            if (this.gameObject.name.Equals(IDRegister .leftPos))
+            {
+                UpdateLocalScore(collider.GetComponent<Thing>().PassDamage(true));
+                gap.score_l = scoreTotal;
+            }
+            else if(this.gameObject.name.Equals(IDRegister .rightPos))  
+            {
+                UpdateLocalScore(collider.GetComponent<Thing>().PassDamage(false));
+                gap.score_r = scoreTotal;
+            }
         }
     }
 
-    void UpdateLocalScore()
+    void UpdateLocalScore(float a)
     {
-
+        scoreTotal += a;       
     }
 
 }

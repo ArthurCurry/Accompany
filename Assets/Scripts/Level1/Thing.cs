@@ -8,13 +8,18 @@ public abstract class Thing : MonoBehaviour{
     protected float a_damage; //对a的伤害
     protected float b_damage; //对b的伤害
 
-    protected bool fly;
-    protected Transform target;
-    protected Vector2 pos;
+    protected bool fly; // 开始飞行
+    protected Transform target; //目标点
+    protected Vector2 pos; //与目标点的向量
 
     protected Rigidbody2D rg;
 
-    public bool isA; //判断谁可以接收
+    protected float time;
+    protected float targetTime;
+
+    public bool isLeft; //判断谁可以接收
+
+
 
 
     public enum type //东西的类型
@@ -27,4 +32,7 @@ public abstract class Thing : MonoBehaviour{
     public abstract void Fly(); //飞向需要的点
 
     public abstract void Accept();
+
+    public abstract float PassDamage(bool which_damage);
+
 }

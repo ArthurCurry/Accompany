@@ -6,11 +6,13 @@ public class Test : Thing{
 
 	// Use this for initialization
 	void Start () {
-		
+        targetTime = 0.4f;
+        time = targetTime;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        time += Time.deltaTime;
         GetPos();
         if (fly)
         {
@@ -23,29 +25,29 @@ public class Test : Thing{
         this.a_damage = aDamage;
         this.b_damage = bDamage;
         this.speed = speed;
-        isA = received;
+        isLeft = received;
         target = a;
         GetPos();
         this.rg = GetComponent<Rigidbody2D>();
         fly = true;
     }
     
-    private void T()  //测试用
-    {
-        this.rg.velocity = pos * speed ;
-        //this.fly = true;
-    }
-
-    private void GetPos()
+    private void GetPos() //检测目标距离
     {
         pos = (target.position - transform.position).normalized;
         
     }
 
-    public void SetPos(Transform a)
+    public void SetPos(Transform a) //设置目标点位置
     {
-        target  = a;
-        speed *= 5;
+        if (time >= targetTime)
+        {
+            target = a;
+            speed *= 5;
+            isLeft = !isLeft;
+            time = 0;
+        }
+
     }
 
     public override void Fly() //飞向需要的点
@@ -55,8 +57,19 @@ public class Test : Thing{
 
     public override void Accept()
     {
-        //受到对应的伤害
+        //特效生成
         Destroy(this.gameObject, 0.1f);
     }
     
+    public override float PassDamage(bool which_damage)
+    {
+        if (which_damage) //左
+        {
+            return a_damage;
+        }
+        else
+        {
+            return b_damage;
+        }
+    }
 }

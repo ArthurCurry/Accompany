@@ -6,7 +6,7 @@ public class Player : MonoBehaviour {
 
     private float speed; //移动速度
 
-    private bool done;
+    private List<GameObject> colliders;
 
     public Transform pos;
 
@@ -28,32 +28,27 @@ public class Player : MonoBehaviour {
     void Start()
     {
         speed = 10;
-        done = false;
+        colliders = new List<GameObject>();
         previousCenter = new Vector3(0, 0, 0);
-        _center_pos = center.transform.position;
         _angle_speed = 4f;
-        _radius_length = Vector3.Distance(transform.position, center.position);
     }
-    void UpdateAngel()
+    void UpdateAngel() //更新角度 始终保持固定的围绕半径
     {
-        center = GameManager.instance.pos1;
-        if (!done)
-        {
-            _center_pos = center.transform.position;
-            _radius_length = Vector3.Distance(transform.position, center.position);
-            temp_angle = -Mathf.Deg2Rad * Vector2.Angle((transform.position - center.position), transform.right);
-            done = true;
-        }
+        center = GameManager.instance.pos2;
         if (Mathf .Abs(center.transform.position.x - previousCenter.x)>0.1)
         {
-            Debug.Log(center.position);
-            Debug.Log(previousCenter);
+            pos = GameManager.instance.pos1;
             _center_pos = center.transform.position;
-            _radius_length = Vector3.Distance(transform.position, center.position);
             temp_angle = -Mathf.Deg2Rad * Vector2.Angle((transform.position - center.position), transform.right);
+            _pos_new.x = _center_pos.x + Mathf.Cos(temp_angle) * _radius_length;
+            _pos_new.y = _center_pos.y + Mathf.Sin(temp_angle) * _radius_length;
+            _pos_new.z = transform.localPosition.z;
+
+            transform.localPosition = _pos_new;
             previousCenter = center.position;
         }
     }
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -83,34 +78,27 @@ public class Player : MonoBehaviour {
         }
         
     }
-
-    void Move()
-    {
-        if(Input .GetKey (KeyCode.W))
-        {
-            transform.Translate(transform.up * speed * Time.deltaTime);
-        }
-        else if(Input .GetKey(KeyCode.S))
-        {
-            transform.Translate(-transform.up * speed * Time.deltaTime);
-        }
-        else if(Input .GetKey (KeyCode.A))
-        {
-            transform.Translate(-transform.right * speed * Time.deltaTime);
-        }
-        else if(Input .GetKey(KeyCode.D))
-        {
-            transform.Translate(transform.right * speed * Time.deltaTime);
-        }
-    }
-
     void OnTriggerStay2D(Collider2D collider)
     {
+        float distance = 0;
+        GameObject target = null;
         if(collider .tag == "Thing")
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                collider.GetComponent<Test>().SetPos(pos);
+                colliders.Add(collider.gameObject);
+                if(colliders.Count > 0)
+                {
+                    for(int i=0; i < colliders.Count; i++)
+                    {
+                        if(distance <= Vector2 .Distance (transform .position ,colliders[i].transform .position))
+                        {
+                            target = colliders[i];
+                            distance = Vector2.Distance(transform.position, colliders[i].transform.position);
+                        }
+                    }
+                    target.GetComponent<Test>().SetPos(pos);
+                }
             }
         }
     }
