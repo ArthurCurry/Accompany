@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour {
     private float maxJumpTime;
     private SpriteRenderer sprite;
 
+    private Animator anim;
+    private float vxLastFrame;
+
 
     // Use this for initialization
     void Start () {
@@ -41,12 +44,16 @@ public class PlayerController : MonoBehaviour {
         originalGravityScale = rb.gravityScale;
         otherPlayer = GameObject.FindWithTag(otherPlayerTag);
         sprite = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+        vxLastFrame = rb.velocity.x;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         Move();
-	}
+        UpdateAnimParameters();
+        vxLastFrame = rb.velocity.x;
+    }
 
     void Jump()
     {
@@ -140,4 +147,10 @@ public class PlayerController : MonoBehaviour {
         SceneManager.LoadScene("Level2");
     }
 
+    void UpdateAnimParameters()
+    {
+        anim.SetFloat("velocityX", rb.velocity.x);
+        anim.SetFloat("velocityY", rb.velocity.y);
+        anim.SetFloat("vXLastFrame", vxLastFrame);
+    }
 }
