@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -13,9 +14,14 @@ public class GameManager : MonoBehaviour {
 
     private bool count;
 
-    private float time;
+    public float time;
     public float animationTime;
     private float targetTime;
+
+    public bool startFly;
+
+    public GameObject image2;
+    public bool nextLevel;
 
     public List<ThingProperty> tp;
 
@@ -23,6 +29,8 @@ public class GameManager : MonoBehaviour {
     public Transform pos2; //左边的点
 
     public static GameManager instance;
+    public AudioPlay ap;
+    public AudioClip hit;
 	// Use this for initialization
 	void Awake () {
         Init();
@@ -36,6 +44,7 @@ public class GameManager : MonoBehaviour {
         {
             instance = this;
         }
+        ap = new AudioPlay();
     }
 
 	// Update is called once per frame
@@ -45,7 +54,11 @@ public class GameManager : MonoBehaviour {
             UpadateTime();
         }
         GetCenterPos();
-        MakeThingsFly();
+        if (startFly)
+        {
+            MakeThingsFly();
+        }
+        ChangeLevel();
 	}
 
     void GetCenterPos()
@@ -57,10 +70,14 @@ public class GameManager : MonoBehaviour {
     void InitTP()
     {
         status = 1;
+        startFly = false;
+        nextLevel = false;
         time = 0;
         animationTime = 0;
         targetTime = 6;
         count = true;
+        image2 = GameObject.Find(IDRegister.CANVAS).transform.Find("Image2").gameObject;
+        hit = ap.AddAudioClip("Audio/off");
         if(tp==null)
         {
             tp = new List<ThingProperty>();
@@ -127,9 +144,17 @@ public class GameManager : MonoBehaviour {
             status += 1;
             time = 0;
         }
-        //else if(time >= targetTime && status == 7)
-        //{
-        //    xin.Init(false, pos1);
-        //}
+        else if(time >= targetTime && status == 7)
+        {
+            xin.Init(false, pos1);
+        }
+    }
+
+    void ChangeLevel()
+    {
+        if(status == 7 && nextLevel)
+        {
+            image2.SetActive(true);
+        }
     }
 }
