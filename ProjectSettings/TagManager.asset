@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Thing
   - Floor
+  - Player1
+  - Player2
+  - Trap
   layers:
   - Default
   - TransparentFX
