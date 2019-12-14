@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour {
     private KeyCode left;
     [SerializeField]
     private KeyCode right;
+    [SerializeField]
+    private KeyCode jump;
     //private float timer;
     private Vector2 direction;
 
@@ -37,22 +39,19 @@ public class PlayerController : MonoBehaviour {
 
     void Move()
     {
-        if(Input.GetKey(left))
+        if(Input.GetKey(left)&& rb.velocity.y == 0f)
         {
             direction = Vector2.left;
-        }
-        if(Input.GetKey(right))
-        {
-            direction = Vector2.right;
-        }
-        if (rb.velocity.y==0f)
-        {
             rb.velocity = direction * moveSpeed;
         }
-        if(Input.GetKeyDown(KeyCode.Space)&&rb.velocity.y==0)
+        if(Input.GetKey(right)&& rb.velocity.y == 0f)
+        {
+            direction = Vector2.right;
+            rb.velocity = direction * moveSpeed;
+        }
+        if(Input.GetKeyDown(jump)&&rb.velocity.y==0)
         {
             Jump();
-            
         }
     }
 
