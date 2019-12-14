@@ -76,11 +76,12 @@ public class PlayerController : MonoBehaviour {
     {
         float timer = 0f;
         rb.gravityScale = 0f;
+        float velocityX = rb.velocity.x;
         while(timer<jumpTime)
         {
             float dampTime = timer / jumpTime;
             Vector2 jumpSpeed = Vector2.Lerp(jumpStartSpeed * Vector2.up, Vector2.zero, dampTime);
-            rb.velocity = new Vector2(direction.x*moveSpeed/3, jumpSpeed.y);
+            rb.velocity = new Vector2(velocityX/3, jumpSpeed.y);
             timer += Time.deltaTime;
             if (rb.velocity.y == 0)
                 StopAllCoroutines();
@@ -113,7 +114,7 @@ public class PlayerController : MonoBehaviour {
     void Die()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        StartCoroutine(DieCoroutine(1.5f));
+        StartCoroutine(DieCoroutine(4f));
     }
 
     void OnTriggerEnter2D(Collider2D other)
