@@ -57,6 +57,13 @@ public class CG : MonoBehaviour
     public void Update()
     {
         //控制透明值变化
+        if(gameObject.name != "Image"|| gameObject.name != "Image2")
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                m_Statuss = FadeStatuss.FadeOut;
+            }
+        }
         if (m_Statuss == FadeStatuss.FadeIn)
         {
             m_Alpha += m_UpdateTime * Time.deltaTime;
