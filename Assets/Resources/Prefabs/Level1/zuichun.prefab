@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212132996903929508}
   - component: {fileID: 50150271098516266}
   - component: {fileID: 114541358923803286}
-  - component: {fileID: 68149059982341556}
+  - component: {fileID: 58528239169771302}
   m_Layer: 0
   m_Name: zuichun
   m_TagString: Thing
@@ -63,8 +63,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!68 &68149059982341556
-EdgeCollider2D:
+--- !u!58 &58528239169771302
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -75,28 +75,9 @@ EdgeCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.2, y: 0.1}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -1.6303852, y: -0.0000006811959}
-  - {x: -1.624031, y: 0.23159502}
-  - {x: -1.4008555, y: 0.22154807}
-  - {x: -0.6861441, y: 1.066589}
-  - {x: -0.2563422, y: 1.0912421}
-  - {x: -0.056461602, y: 0.93191075}
-  - {x: 0.23913655, y: 0.95230746}
-  - {x: 0.23809704, y: 1.1143507}
-  - {x: 0.7788222, y: 1.0581686}
-  - {x: 1.2609086, y: 0.319892}
-  - {x: 1.5095205, y: 0.21140029}
-  - {x: 1.6696153, y: 0.1176926}
-  - {x: 1.378122, y: -0.07298674}
-  - {x: 0.7780824, y: -0.9023473}
-  - {x: 0.3749929, y: -1.0984684}
-  - {x: -0.6435775, y: -0.9631294}
-  - {x: -1.0212101, y: -0.68949795}
-  - {x: -1.3798529, y: -0.110455915}
-  - {x: -1.6257898, y: 0.05884647}
+  m_Offset: {x: -0.15, y: 0.2}
+  serializedVersion: 2
+  m_Radius: 1.5
 --- !u!114 &114541358923803286
 MonoBehaviour:
   m_ObjectHideFlags: 1

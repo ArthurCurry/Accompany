@@ -29,7 +29,7 @@ public class Test : Thing{
             {
                 this.a_damage = GameManager.instance.tp[i].a_damage;
                 this.b_damage = GameManager.instance.tp[i].b_damage;
-                this.speed = GameManager.instance.tp[i].speed + (GameManager.instance.status - 1) * 0.1f;
+                this.speed = GameManager.instance.tp[i].speed + (GameManager.instance.status - 1) * 0.25f;
             }
         }
         isLeft = received;
@@ -70,6 +70,10 @@ public class Test : Thing{
     public override void Accept()
     {
         //特效生成
+        if(gameObject .name .Equals("xinfeng"))
+        {
+            GameManager.instance.nextLevel = true;
+        }
         Destroy(this.gameObject, 0.1f);
     }
     

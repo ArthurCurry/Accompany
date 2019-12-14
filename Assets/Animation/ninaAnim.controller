@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: NinaAnim
+  m_Name: ninaAnim
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: velocityX

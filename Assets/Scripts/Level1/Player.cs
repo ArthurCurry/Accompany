@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 
     private List<GameObject> colliders;
 
+    private Animation an;
+
     public Transform pos;
 
     public Transform center;
@@ -27,6 +29,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        an=GetComponent<Animation>();
         speed = 10;
         colliders = new List<GameObject>();
         previousCenter = new Vector3(0, 0, 0);
@@ -85,22 +88,34 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                an.Play();
+                GameManager.instance.ap.PlayClipAtPoint(GameManager.instance.hit, Camera.main.transform.position);
                 collider.GetComponent<Test>().SetPos(pos);
             }
         }
     }
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (collider.tag == "Thing")
         {
-            collider.GetComponent<Test>().SetPos(pos);
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                an.Play();
+                GameManager.instance.ap.PlayClipAtPoint(GameManager.instance.hit, Camera.main.transform.position);
+                collider.GetComponent<Test>().SetPos(pos);
+            }
         }
     }
     void OnTriggerExit2D(Collider2D collider)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (collider.tag == "Thing")
         {
-            collider.GetComponent<Test>().SetPos(pos);
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                an.Play();
+                GameManager.instance.ap.PlayClipAtPoint(GameManager.instance.hit, Camera.main.transform.position);
+                collider.GetComponent<Test>().SetPos(pos);
+            }
         }
     }
 
