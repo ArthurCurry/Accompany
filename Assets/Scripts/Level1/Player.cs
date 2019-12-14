@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
         speed = 10;
         colliders = new List<GameObject>();
         previousCenter = new Vector3(0, 0, 0);
-        _angle_speed = 5f;
+        _angle_speed = 7f;
     }
     void UpdateAngel() //更新角度 始终保持固定的围绕半径
     {

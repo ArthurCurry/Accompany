@@ -57,7 +57,8 @@ public class CG : MonoBehaviour
     public void Update()
     {
         //控制透明值变化
-        if(gameObject.name != "Image"|| gameObject.name != "Image2")
+        if(gameObject.name == "Image"|| gameObject.name == "Image2") { }
+        else
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {

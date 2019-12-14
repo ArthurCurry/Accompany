@@ -32,7 +32,7 @@ public class Player2 : MonoBehaviour {
         an = GetComponent<Animation>();
         speed = 10;
         previousCenter = new Vector3(0, 0, 0);
-        _angle_speed = 4f;
+        _angle_speed = 7f;
     }
     void UpdateAngel() //更新角度 始终保持固定的围绕半径
     {
