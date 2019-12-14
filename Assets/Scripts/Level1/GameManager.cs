@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
     private bool count;
 
     private float time;
-    private float animationTime;
+    public float animationTime;
     private float targetTime;
 
     public List<ThingProperty> tp;
