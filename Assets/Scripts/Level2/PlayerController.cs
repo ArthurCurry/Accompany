@@ -20,11 +20,23 @@ public class PlayerController : MonoBehaviour {
     private KeyCode jump;
     //private float timer;
     private Vector2 direction;
+    [SerializeField]
+    private string otherPlayerTag;
+    private GameObject otherPlayer;
+    [SerializeField]
+    private float maxDis;
+    [SerializeField]
+    private float minDis;
+    [SerializeField]
+    private float minJumpTime;
+    [SerializeField]
+    private float maxJumpTime;
 
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody2D>();
         originalGravityScale = rb.gravityScale;
+        otherPlayer = GameObject.FindWithTag(otherPlayerTag);
 	}
 	
 	// Update is called once per frame
@@ -34,6 +46,7 @@ public class PlayerController : MonoBehaviour {
 
     void Jump()
     {
+        UpdateJumpTime();
         StartCoroutine(JumpCoroutine(jumpVector));
     }
 
@@ -74,7 +87,7 @@ public class PlayerController : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.collider.name);
+        //Debug.Log(collision.collider.name);
         if(collision.collider.gameObject.tag.Equals("Floor"))
         {
             StopAllCoroutines();
@@ -82,4 +95,15 @@ public class PlayerController : MonoBehaviour {
             rb.velocity = new Vector2(rb.velocity.x, 0);
         }
     }
+    
+    void UpdateJumpTime()
+    {
+        float disBetweenPlayers = (this.transform.position - otherPlayer.transform.position).magnitude;
+        jumpTime = disBetweenPlayers * (maxJumpTime - minJumpTime) / (maxDis - minDis);
+        if (disBetweenPlayers >= maxDis)
+            jumpTime = maxJumpTime;
+        if (disBetweenPlayers <= minDis)
+            jumpTime = minJumpTime;
+    }
+
 }
