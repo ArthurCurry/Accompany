@@ -27,7 +27,7 @@ public abstract class Thing : MonoBehaviour{
         
     }
 
-    public abstract void Init(float aDamage, float bDamage, float speed ,bool received , Transform a); //东西飞出初始化
+    public abstract void Init(bool received , Transform a); //东西飞出初始化
 
     public abstract void Fly(); //飞向需要的点
 
