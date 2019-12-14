@@ -24,7 +24,9 @@ public class Player : MonoBehaviour {
 
     public Vector3 _center_pos;
     // Use this for initialization
-    void Start () {
+
+    void Start()
+    {
         speed = 10;
         done = false;
         previousCenter = new Vector3(0, 0, 0);
@@ -32,10 +34,16 @@ public class Player : MonoBehaviour {
         _angle_speed = 4f;
         _radius_length = Vector3.Distance(transform.position, center.position);
     }
-
     void UpdateAngel()
     {
         center = GameManager.instance.pos1;
+        if (!done)
+        {
+            _center_pos = center.transform.position;
+            _radius_length = Vector3.Distance(transform.position, center.position);
+            temp_angle = -Mathf.Deg2Rad * Vector2.Angle((transform.position - center.position), transform.right);
+            done = true;
+        }
         if (Mathf .Abs(center.transform.position.x - previousCenter.x)>0.1)
         {
             Debug.Log(center.position);
