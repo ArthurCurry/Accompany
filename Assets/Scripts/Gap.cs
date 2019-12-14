@@ -15,7 +15,7 @@ public class Gap : MonoBehaviour {
     public float width;//宽
     [HideInInspector]
     public float height;
-    
+    private int[] thresholds = { -80, -40, -20, 0, 20, 40 };    //阈值，每档中间不作响应
 	// Use this for initialization
 	void Start () {
         collider = GetComponent<BoxCollider2D>();
@@ -60,8 +60,8 @@ public class Gap : MonoBehaviour {
         }
     }
 
-    public void UpdateDiff()
+    public void UpdateDiff(float targetDiff)
     {
-
+        diff = targetDiff;
     }
 }

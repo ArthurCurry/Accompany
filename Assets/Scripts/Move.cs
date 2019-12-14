@@ -9,6 +9,8 @@ public class Move : MonoBehaviour {
     [SerializeField]
     private GameObject gapObj;
     private Gap gap;
+    private float scoreTotal;
+    private float scoreTemp;
 
 	// Use this for initialization
 	void Start () {
@@ -46,4 +48,10 @@ public class Move : MonoBehaviour {
             gap.UpdateTargetSize(false);
         }
     }
+
+    void UpdateLocalScore()
+    {
+
+    }
+
 }
