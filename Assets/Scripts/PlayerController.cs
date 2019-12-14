@@ -12,7 +12,12 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private float jumpTime;//控制跳跃时间
     private float originalGravityScale;
+    [SerializeField]
+    private KeyCode left;
+    [SerializeField]
+    private KeyCode right;
     //private float timer;
+    private Vector2 direction;
 
     // Use this for initialization
     void Start () {
@@ -32,10 +37,17 @@ public class PlayerController : MonoBehaviour {
 
     void Move()
     {
-        float direction = Input.GetAxis("Horizontal");
+        if(Input.GetKey(left))
+        {
+            direction = Vector2.left;
+        }
+        if(Input.GetKey(right))
+        {
+            direction = Vector2.right;
+        }
         if (rb.velocity.y==0f)
         {
-            rb.velocity = new Vector2(moveSpeed * direction, 0);
+            rb.velocity = direction * moveSpeed;
         }
         if(Input.GetKeyDown(KeyCode.Space)&&rb.velocity.y==0)
         {
