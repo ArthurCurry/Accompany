@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour {
 
@@ -22,7 +23,7 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         CameraMove();
-        
+        Restart();
 	}
 
     void Follow(Vector2 target,float speed)
@@ -42,5 +43,12 @@ public class CameraController : MonoBehaviour {
         }
     }
 
+    void Restart()
+    {
+        if (player1.transform.position.y < Camera.main.ScreenToWorldPoint(new Vector3(0, 0, -10)).y|| player1.transform.position.y < Camera.main.ScreenToWorldPoint(new Vector3(0, 0, -10)).y)
+            SceneManager.LoadScene("Level2");
+        if (player2.transform.position.y < Camera.main.ScreenToWorldPoint(new Vector3(0, 0, -10)).y || player2.transform.position.y < Camera.main.ScreenToWorldPoint(new Vector3(0, 0, -10)).y)
+            SceneManager.LoadScene("Level2");
+    }
 
 }
