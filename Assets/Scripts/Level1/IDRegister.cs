@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IDRegister  {
 
-    public const string rightPos = "Pos";
-    public const string leftPos = "Pos2";
+    public const string rightPos = "PosR";
+    public const string leftPos = "PosL";
     public const string thingTag = "Thing";
 }
